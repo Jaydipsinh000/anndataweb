@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>किसान सूची</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <header>
+    <div class="logo-title-wrapper">
+      <img src="images/logo.jpeg" alt="Anndata Logo" class="logo" />
+      <div class="logo-title">
+        <span class="logo-main">अन्नदाता</span>
+        <span class="logo-sub">किसानों का सच्चा साथी</span>
+      </div>
+    </div>
+    <nav>
+      <ul class="navbar" id="nav-links">
+        <li><a href="index.html">होम</a></li>
+        <li><a href="tools.html">उपकरण</a></li>
+        <li><a href="organic.html">जैविक खेती</a></li>
+        <li><a href="crops.html">फसल जानकारी</a></li>
+        <li><a href="register.html">पंजीकरण</a></li>
+        <li><a href="contact.html">संपर्क करें</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main class="content-section">
+    <h1>पंजीकृत किसानों की सूची</h1>
+    <ul id="farmerList"></ul>
+  </main>
+  <footer><p>© 2025 अन्नदाता | सर्वाधिकार सुरक्षित।</p></footer>
+  <script>
+    const farmers = JSON.parse(localStorage.getItem("farmers")) || [];
+    const ul = document.getElementById("farmerList");
+    farmers.forEach(f => {
+      const li = document.createElement("li");
+      li.textContent = `${f.name} (${f.village}) - ${f.mobile}`;
+      ul.appendChild(li);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="hi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Contact Us — Anndata / અન્નદાતા</title>
+  <style>
+    :root{--bg:#f6fbf6;--card:#ffffff;--accent:#2f8f4a;--muted:#6b7280}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,'Noto Sans','Helvetica Neue',Arial; background:var(--bg); color:#0b1220}
+    .container{max-width:900px;margin:36px auto;padding:20px}
+    .card{background:var(--card);border-radius:12px;box-shadow:0 6px 20px rgba(10,20,30,0.06);padding:26px}
+    h1{margin:0 0 6px;font-size:22px}
+    p.lead{margin:0 0 18px;color:var(--muted)}
+
+    .grid{display:grid;grid-template-columns:1fr 360px;gap:20px}
+    @media(max-width:880px){.grid{grid-template-columns:1fr}}
+
+    form{display:flex;flex-direction:column;gap:12px}
+    label{font-size:13px;color:#0b1220}
+    input[type=text], input[type=email], textarea, select{width:100%;padding:10px;border:1px solid #e6e9ee;border-radius:8px;font-size:15px}
+    textarea{min-height:120px;resize:vertical}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    @media(max-width:520px){.row{grid-template-columns:1fr}}
+
+    .small{font-size:13px;color:var(--muted)}
+    .btn{background:var(--accent);color:white;padding:10px 14px;border-radius:10px;border:0;font-weight:600;cursor:pointer}
+    .btn:disabled{opacity:0.6;cursor:not-allowed}
+
+    .aside{padding:20px;border-radius:8px;background:linear-gradient(180deg,#f8fff8,#ffffff);border:1px solid #edf6ec}
+    .contact-item{display:flex;gap:12px;align-items:flex-start;margin-bottom:12px}
+    .icon{width:36px;height:36px;flex:0 0 36px;border-radius:8px;background:#eef9ee;display:grid;place-items:center;color:var(--accent);font-weight:700}
+
+    .msg{padding:10px;border-radius:8px;background:#e9f7ef;color:#0b5f2b;border:1px solid #d6eed9}
+    .error{padding:10px;border-radius:8px;background:#fff0f0;color:#7a1a1a;border:1px solid #ffd6d6}
+
+    footer.smallcenter{margin-top:16px;text-align:center;color:var(--muted);font-size:13px}
+  </style>
+</head>
+<body>
+  <main class="container">
+    <div class="card">
+      <h1>Contact Us / संपर्क करें</h1>
+      <p class="lead">Questions, feedback or need help? Fill the form below or use the contact details on the right. We will reply as soon as possible.</p>
+      <div class="grid">
+        <section>
+          <form id="contactForm" novalidate>
+            <div class="row">
+              <div>
+                <label for="name">Name / नाम</label>
+                <input id="name" name="name" type="text" placeholder="Your name / आपका नाम" required />
+              </div>
+              <div>
+                <label for="phone">Phone / फ़ोन</label>
+                <input id="phone" name="phone" type="text" placeholder="10-digit mobile / 10-अंकों का मोबाइल" inputmode="numeric" />
+              </div>
+            </div>
+
+            <div>
+              <label for="email">Email / ईमेल</label>
+              <input id="email" name="email" type="email" placeholder="you@example.com" />
+            </div>
+
+            <div>
+              <label for="subject">Subject / विषय</label>
+              <select id="subject" name="subject">
+                <option value="general">General enquiry / सामान्य प्रश्न</option>
+                <option value="support">Support / सहायता</option>
+                <option value="partnership">Partnership / साझेदारी</option>
+                <option value="feedback">Feedback / प्रतिक्रिया</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="message">Message / संदेश</label>
+              <textarea id="message" name="message" placeholder="Write your message... / अपना संदेश लिखें" required></textarea>
+            </div>
+
+            <div style="display:flex;gap:10px;align-items:center;margin-top:8px">
+              <button class="btn" id="sendBtn" type="submit">Send Message / संदेश भेजें</button>
+              <div class="small">हम जवाब भेजने की पूरी कोशिश करेंगे।</div>
+            </div>
+
+            <div id="formAlert" style="margin-top:12px;display:none"></div>
+          </form>
+        </section>
+
+        <aside class="aside">
+          <div class="contact-item"><div class="icon">📍</div><div><strong>Office</strong><div class="small">Anndata, Gandhinagar, Gujarat</div></div></div>
+          <div class="contact-item"><div class="icon">📞</div><div><strong>Phone</strong><div class="small">+91 99999 99999</div></div></div>
+          <div class="contact-item"><div class="icon">✉️</div><div><strong>Email</strong><div class="small">hello@anndata.example</div></div></div>
+
+          <hr style="border:none;border-top:1px solid #eef4ee;margin:14px 0">
+
+          <div><strong>Office hours / कार्यालय समय</strong>
+            <div class="small">Mon — Sat: 9:30 AM — 6:00 PM</div>
+          </div>
+
+          <div style="margin-top:12px"><strong>Quick tips</strong>
+            <ul class="small" style="margin:8px 0 0 18px;padding:0">
+              <li>For registration help, attach a screenshot of the issue.</li>
+              <li>For orders, include order id in the message.</li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+
+      <div class="smallcenter">© Anndata — Simple, farmer friendly site</div>
+    </div>
+  </main>
+
+  <script>
+    // Basic client-side validation + mock submission
+    const form = document.getElementById('contactForm');
+    const alertBox = document.getElementById('formAlert');
+    form.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      alertBox.style.display='none';
+
+      const name = form.name.value.trim();
+      const phone = form.phone.value.trim();
+      const email = form.email.value.trim();
+      const message = form.message.value.trim();
+
+      if(!name){ return showError('Please enter your name / कृपया अपना नाम दर्ज करें') }
+      if(!message){ return showError('Please enter a message / कृपया संदेश लिखें') }
+      if(phone && !/^\d{10}$/.test(phone)){
+        return showError('Enter a valid 10-digit mobile number / 10-अंकों का मोबाइल डालें')
+      }
+      if(email && !/^\S+@\S+\.\S+$/.test(email)){
+        return showError('Enter a valid email / वैध ईमेल डालें')
+      }
+
+      // Mock submission (replace with real fetch to your backend)
+      const data = {name,phone,email,subject:form.subject.value,message};
+      showMessage('Sending...');
+      document.getElementById('sendBtn').disabled = true;
+
+      // Simulate network
+      setTimeout(()=>{
+        document.getElementById('sendBtn').disabled = false;
+        form.reset();
+        showMessage('Thank you — we received your message. / धन्यवाद — हमें आपका संदेश मिला।', false);
+      },900);
+    });
+
+    function showError(text){
+      alertBox.innerHTML = `<div class="error">${text}</div>`;
+      alertBox.style.display = 'block';
+    }
+    function showMessage(text, autoHide = true){
+      alertBox.innerHTML = `<div class="msg">${text}</div>`;
+      alertBox.style.display = 'block';
+      if(autoHide) setTimeout(()=> alertBox.style.display='none',4000);
+    }
+  </script>
+</body>
+</html>

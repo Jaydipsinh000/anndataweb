@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>અન્નદાતા | Anndata</title>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #d8f0d8; /* light farm-green */
+}
+.language-container {
+  max-width: 600px;
+  margin: 80px auto;
+  text-align: center;
+  background: #fff;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+h1 {
+  margin-bottom: 10px;
+  color: #2e4d1e;
+}
+p { color: #336633; margin-bottom: 20px; font-size: 1rem; }
+.lang-buttons, .guest-section, .auth-section { margin: 20px 0; }
+.btn {
+  display: inline-block;
+  padding: 12px 24px;
+  margin: 8px;
+  border-radius: 8px;
+  font-weight: bold;
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+}
+.btn:hover { transform: translateY(-3px) scale(1.05); box-shadow:0 5px 15px rgba(0,0,0,0.3);}
+.btn.selected::after {
+  content: '🌿';
+  position: absolute;
+  top:-10px;
+  right:-10px;
+  font-size: 1.4rem;
+  animation: leafGlow 1.5s infinite alternate;
+}
+@keyframes leafGlow { 0%{transform: rotate(0deg) scale(1);} 50%{transform: rotate(15deg) scale(1.1);} 100%{transform: rotate(0deg) scale(1);} }
+
+/* Language buttons */
+.btn[data-lang="gu"] { background: #2e7d32; }
+.btn[data-lang="hi"] { background: #2e7d32; } 
+.btn[data-lang="en"] { background: #2e7d32; } 
+.btn[data-lang="gu"]:hover, .btn[data-lang="hi"]:hover, .btn[data-lang="en"]:hover { opacity:0.85; }
+
+/* Guest/Login */
+.btn.guest { background: #2196F3; } /* blue */
+.btn.guest:hover { background: #1976D2; }
+.btn.login { background: #FF9800; } /* orange */
+.btn.login:hover { background: #F57C00; }
+
+hr { border:none; height:1px; background:#c8e6c9; margin:30px 0; }
+
+@media(max-width:500px){
+  .btn { width:80%; margin:8px auto; }
+}
+</style>
+</head>
+<body>
+
+<div class="language-container">
+  <h1>Welcome to અન્નદાતા (Anndata)</h1>
+  <p>Select your language to continue:</p>
+
+  <div class="lang-buttons">
+    <div class="btn" data-lang="gu">ગુજરાતી (Gujarati)</div>
+    <div class="btn" data-lang="hi">हिंदी (Hindi)</div>
+    <div class="btn" data-lang="en">English</div>
+  </div>
+
+  <hr>
+
+  <div class="guest-section">
+    <h3>Or continue without login</h3>
+    <a href="#" id="guestBtn" class="btn guest">Continue as Guest</a>
+  </div>
+
+  <hr>
+
+  <div class="auth-section">
+    <h3>Already have an account?</h3>
+    <a href="#" id="loginBtn" class="btn login">Login / Register</a>
+  </div>
+</div>
+
+<script>
+// ===== Language Selection =====
+let selectedLang = localStorage.getItem('selectedLang') || 'en';
+updateTick(selectedLang);
+
+document.querySelectorAll('.lang-buttons .btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    selectedLang = btn.getAttribute('data-lang');
+    localStorage.setItem('selectedLang',selectedLang);
+    updateTick(selectedLang);
+  });
+});
+
+function updateTick(lang){
+  document.querySelectorAll('.lang-buttons .btn').forEach(btn=>{
+    btn.classList.remove('selected');
+    if(btn.getAttribute('data-lang')===lang){ btn.classList.add('selected'); }
+  });
+}
+
+// Guest/Login buttons
+document.getElementById('guestBtn').addEventListener('click',()=>{ window.location.href=selectedLang+'/index.html'; });
+document.getElementById('loginBtn').addEventListener('click',()=>{ window.location.href=selectedLang+'/register.php'; });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Anndata | Tools</title>
+  <link rel="stylesheet" href="../styles.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f5f7fa;
+    }
+    .container {
+      display: flex;
+      height: calc(100vh - 100px);
+    }
+    .methods-list {
+      width: 18%;
+      background: #ffffff;
+      border-right: 2px solid #eee;
+      padding: 15px;
+      box-shadow: 2px 0 8px rgba(0,0,0,0.05);
+      overflow-y: auto;
+    }
+    .methods-list button {
+      display: block;
+      width: 100%;
+      background: #f0f0f0;
+      border: none;
+      padding: 12px;
+      margin-bottom: 8px;
+      text-align: left;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .methods-list button:hover {
+      background: #d9f2d9;
+    }
+    .methods-list button.active {
+      background: #2b7a0b;
+      color: white;
+      font-weight: bold;
+    }
+    .tools-display {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+      height: calc(100vh - 100px);
+    }
+    .tool-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+      margin-top: 20px;
+    }
+    @media(max-width: 992px) {
+      .tool-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media(max-width: 600px) {
+      .tool-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .tool-card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+      text-align: center;
+      padding: 20px;
+      transition: transform 0.3s ease;
+    }
+    .tool-card:hover {
+      transform: translateY(-6px);
+    }
+    .tool-card h3 {
+      margin: 0 0 15px;
+      font-size: 20px;
+      color: #2b7a0b;
+    }
+    .tool-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: contain;
+      margin-bottom: 15px;
+    }
+    .tool-card p {
+      margin: 0;
+      color: #333;
+      font-size: 15px;
+      line-height: 1.4;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header/Navbar -->
+  <header>
+    <div style="display: flex; align-items: center;">
+      <img src="../images/logo.jpeg" alt="Anndata Logo" class="logo" />
+      <div class="logo-title" style="line-height: 1;">
+        <span style="font-size: 2rem; font-weight: bold; color: #fff;">Anndata</span>
+        <span style="font-size: 1rem; color: #e0ffe0;">True Companion of Farmers</span>
+      </div>
+    </div>
+    <nav>
+      <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </div>
+      <ul class="navbar" id="nav-links">
+        <li><a href="index.html" >Home</a></li>
+        <li><a href="tools.html" class="active">Tools</a></li>
+        <li><a href="organic.html" >Organic Farming</a></li>
+        <li><a href="crops.html" >Crop Info</a></li>
+        <li><a href="register.php" >Register / Login</a></li>
+        
+      </ul>
+      
+    </nav>
+  </header>
+
+  <!-- Main content -->
+  <div class="container">
+    <div class="methods-list">
+      <button onclick="showTools('harvesting', this)">Harvesting Tools</button>
+      <button onclick="showTools('growing', this)">Growing Tools</button>
+      <button onclick="showTools('transport', this)">Transportation Tools</button>
+      <button onclick="showTools('storage', this)">Storage Tools</button>
+      <button onclick="showTools('irrigation', this)">Irrigation Tools</button>
+      <button onclick="showTools('fertilizer', this)">Fertilizer Tools</button>
+      <button onclick="showTools('protection', this)">Crop Protection Tools</button>
+    </div>
+
+    <div class="tools-display" id="toolsDisplay">
+      <h2 style="padding: 40px; text-align:center; color:#2b7a0b;">Please select a category</h2>
+    </div>
+  </div>
+ <script src="../script.js"></script>
+  <script>
+    const toolsData = {
+      harvesting: [
+        { name: "Sickle", img: "../images/tools/sickle.jpg", benefit: "Lightweight tool for manual harvesting of cereals and grasses." },
+        { name: "Harvesting Machine", img: "../images/tools/harvester.jpg", benefit: "Saves time and reduces manual labor for large farms." },
+        { name: "Thresher", img: "../images/tools/thresher.jpg", benefit: "Helps in separating grains from stalks efficiently." },
+        { name: "Combine Harvester", img: "../images/tools/combine.jpg", benefit: "Performs reaping, threshing and winnowing in one process." },
+        { name: "Reaper", img: "../images/tools/reaper.jpg", benefit: "Speeds up the harvesting of wheat and rice crops." },
+        { name: "Shears", img: "../images/tools/shears.jpg", benefit: "Useful for pruning and harvesting fruits or small plants." }
+      ],
+      growing: [
+        { name: "Plough", img: "../images/tools/plough.jpg", benefit: "Breaks and loosens soil to prepare fields for sowing." },
+        { name: "Seed Drill", img: "../images/tools/seeddriil.jpg", benefit: "Ensures proper placement of seeds at uniform depth." },
+        { name: "Cultivator", img: "../images/tools/cultivator.jpg", benefit: "Used for soil aeration and weed control between rows." },
+        { name: "Rotavator", img: "../images/tools/rotavator.jpg", benefit: "Efficiently tills soil and mixes organic matter evenly." },
+        { name: "Hoe", img: "../images/tools/hoe.jpg", benefit: "Manual tool for digging, shaping soil, and removing weeds." },
+        { name: "Weeder", img: "../images/tools/weeder.jpg", benefit: "Reduces manual effort in removing weeds from crops." }
+      ],
+      transport: [
+        { name: "Bullock Cart", img: "../images/tools/bullockcart.jpg", benefit: "Traditional method for transporting crops and goods." },
+        { name: "Tractor Trolley", img: "../images/tools/trolley.jpg", benefit: "Used for carrying heavy loads of harvested crops." },
+        { name: "Truck", img: "../images/tools/truck.jpg", benefit: "Ideal for transporting large amounts of produce long distances." },
+        { name: "Sack Carrier", img: "../images/tools/sack.jpg", benefit: "Handy for carrying crop bags manually." },
+        { name: "Hand Cart", img: "../images/tools/handcart.jpg", benefit: "Useful for moving goods short distances within farms." },
+        { name: "Mini Pickup", img: "../images/tools/pickup.jpg", benefit: "Affordable vehicle for local transportation of crops." }
+      ],
+      storage: [
+        { name: "Grain Silo", img: "../images/tools/silo.jpg", benefit: "Keeps grains safe and dry for long-term storage." },
+        { name: "Storage Bags", img: "../images/tools/storagebag.jpg", benefit: "Used for small-scale grain and produce storage." },
+        { name: "Cold Storage", img: "../images/tools/coldstorage.jpg", benefit: "Maintains temperature for fruits and vegetables." },
+        { name: "Storage Drum", img: "../images/tools/drum.jpg", benefit: "Affordable option for liquid or grain storage." },
+        { name: "Metal Bins", img: "../images/tools/bin.jpg", benefit: "Strong and durable option for crop storage." },
+        { name: "Warehouse", img: "../images/tools/warehouse.jpg", benefit: "Large scale storage for farmers’ produce." }
+      ],
+      irrigation: [
+        { name: "Sprinkler System", img: "../images/tools/sprinkler.jpg", benefit: "Distributes water evenly across the field." },
+        { name: "Drip Irrigation", img: "../images/tools/drip.jpg", benefit: "Conserves water by targeting roots directly." },
+        { name: "Water Pump", img: "../images/tools/pump.jpg", benefit: "Helps to pump water from rivers or wells." },
+        { name: "Canal System", img: "../images/tools/canal.jpg", benefit: "Large-scale irrigation using canal water." },
+        { name: "Hand Watering Can", img: "../images/tools/wateringcan.jpg", benefit: "Simple manual irrigation tool." },
+        { name: "Pipe Irrigation", img: "../images/tools/pipe.jpg", benefit: "Uses pipes to distribute water efficiently." }
+      ],
+      fertilizer: [
+        { name: "Fertilizer Spreader", img: "../images/tools/spreader.jpg", benefit: "Distributes fertilizer evenly across fields." },
+        { name: "Sprayer", img: "../images/tools/sprayer.jpg", benefit: "Used for spraying liquid fertilizers or pesticides." },
+        { name: "Compost Bin", img: "../images/tools/compost.jpg", benefit: "Helps in preparing organic fertilizer." },
+        { name: "Broadcast Seeder", img: "../images/tools/broadcast.jpg", benefit: "Applies seeds and fertilizers simultaneously." },
+        { name: "Manure Cart", img: "../images/tools/manure.jpg", benefit: "Carries organic manure to crop fields." },
+        { name: "Drum Seeder", img: "../images/tools/drumseeder.jpg", benefit: "Sows paddy seeds with organic manure together." }
+      ],
+      protection: [
+        { name: "Insect Net", img: "../images/tools/net.jpg", benefit: "Protects crops from insect attacks." },
+        { name: "Scarecrow", img: "../images/tools/scarecrow.jpg", benefit: "Traditional method to protect crops from birds." },
+        { name: "Organic Pesticide Sprayer", img: "../images/tools/organicsprayer.jpg", benefit: "Sprays eco-friendly pesticides." },
+        { name: "Fencing", img: "../images/tools/fence.jpg", benefit: "Prevents animals from entering crop fields." },
+        { name: "Traps", img: "../images/tools/trap.jpg", benefit: "Used to catch harmful insects and pests." },
+        { name: "Protective Cover", img: "../images/tools/cover.jpg", benefit: "Shields crops from harsh weather." }
+      ]
+    };
+
+    function showTools(category, btn) {
+      document.querySelectorAll(".methods-list button").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+
+      const display = document.getElementById("toolsDisplay");
+      const cards = toolsData[category].map(t => 
+        `<div class="tool-card">
+           <h3>${t.name}</h3>
+           <img src="${t.img}" alt="${t.name}"/>
+           <p>${t.benefit}</p>
+         </div>`
+      ).join("");
+      display.innerHTML = `<h2>${btn.innerText}</h2><div class="tool-grid">${cards}</div>`;
+    }
+
+    
+  </script>
+</body>
+</html>

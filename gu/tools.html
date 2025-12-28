@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>અન્નદાતા | સાધનો</title>
+  <link rel="stylesheet" href="../styles.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f5f7fa;
+    }
+    .container {
+      display: flex;
+      height: calc(100vh - 100px);
+    }
+    .methods-list {
+      width: 18%;
+      background: #ffffff;
+      border-right: 2px solid #eee;
+      padding: 15px;
+      box-shadow: 2px 0 8px rgba(0,0,0,0.05);
+      overflow-y: auto;
+    }
+    .methods-list button {
+      display: block;
+      width: 100%;
+      background: #f0f0f0;
+      border: none;
+      padding: 12px;
+      margin-bottom: 8px;
+      text-align: left;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .methods-list button:hover {
+      background: #d9f2d9;
+    }
+    .methods-list button.active {
+      background: #2b7a0b;
+      color: white;
+      font-weight: bold;
+    }
+    .tools-display {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+      height: calc(100vh - 100px);
+    }
+    .tool-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+      margin-top: 20px;
+    }
+    @media(max-width: 992px) {
+      .tool-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media(max-width: 600px) {
+      .tool-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .tool-card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+      text-align: center;
+      padding: 20px;
+      transition: transform 0.3s ease;
+    }
+    .tool-card:hover {
+      transform: translateY(-6px);
+    }
+    .tool-card h3 {
+      margin: 0 0 15px;
+      font-size: 20px;
+      color: #2b7a0b;
+    }
+    .tool-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: contain;
+      margin-bottom: 15px;
+    }
+    .tool-card p {
+      margin: 0;
+      color: #333;
+      font-size: 15px;
+      line-height: 1.4;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header/Navbar -->
+  <header>
+    <div style="display: flex; align-items: center;">
+      <img src="../images/logo.jpeg" alt="Anndata Logo" class="logo" />
+      <div class="logo-title" style="line-height: 1;">
+        <span style="font-size: 2rem; font-weight: bold; color: #fff;">અન્નદાતા</span>
+        <span style="font-size: 1rem; color: #e0ffe0;">ખેડૂતોનો સાચો સાથી</span>
+      </div>
+    </div>
+    <nav>
+      <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </div>
+      <ul class="navbar" id="nav-links">
+        <li><a href="index.html" >હોમ</a></li>
+        <li><a href="tools.html" class="active">સાધનો</a></li>
+        <li><a href="organic.html">જૈવિક ખેતી</a></li>
+        <li><a href="crops.html" >પાક માહિતી</a></li>
+        <li><a href="register.php">નોંધણી / લોગિન</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main content -->
+  <div class="container">
+    <div class="methods-list">
+      <button onclick="showTools('harvesting', this)">કાપણીના સાધનો</button>
+      <button onclick="showTools('growing', this)">વાવેતરના સાધનો</button>
+      <button onclick="showTools('transport', this)">પરિવહન સાધનો</button>
+      <button onclick="showTools('storage', this)">સંગ્રહ સાધનો</button>
+      <button onclick="showTools('irrigation', this)">સિંચાઈ સાધનો</button>
+      <button onclick="showTools('fertilizer', this)">ખાતર સાધનો</button>
+      <button onclick="showTools('protection', this)">પાક રક્ષણ સાધનો</button>
+    </div>
+
+    <div class="tools-display" id="toolsDisplay">
+      <h2 style="padding: 40px; text-align:center; color:#2b7a0b;">કૃપા કરીને કેટેગરી પસંદ કરો</h2>
+    </div>
+  </div>
+<script src="../script.js"></script>
+  <script>
+    const toolsData = {
+      harvesting: [
+        { name: "વાળી", img: "../images/tools/sickle.jpg", benefit: "અનાજ અને ઘાસ કાપવા માટે હળવું હાથ સાધન." },
+        { name: "કાપણી મશીન", img: "../images/tools/harvester.jpg", benefit: "મોટા ખેતરોમાં કાપણી માટે સમય અને મજૂરી બચાવે છે." },
+        { name: "થ્રેશર", img: "../images/tools/thresher.jpg", benefit: "અનાજને ડાંગરમાંથી અલગ કરવામાં મદદરૂપ." },
+        { name: "કોમ્બાઈન હાર્વેસ્ટર", img: "../images/tools/combine.jpg", benefit: "એક સાથે કાપણી, ઝાડણી અને પવનાટણ કરે છે." },
+        { name: "રીપર", img: "../images/tools/reaper.jpg", benefit: "ઘઉં અને ચોખાની કાપણી ઝડપથી કરે છે." },
+        { name: "કાંટીઓ", img: "../images/tools/shears.jpg", benefit: "ફળ અથવા નાના છોડ કાપવા અને છાંટણી માટે ઉપયોગી." }
+      ],
+      growing: [
+        { name: "હળ", img: "../images/tools/plough.jpg", benefit: "ખેતર તૈયાર કરવા માટે જમીન ઉથલાવવાનું સાધન." },
+        { name: "બીજ વાવણીયંત્ર", img: "../images/tools/seeddriil.jpg", benefit: "બીજને સમાન ઊંડાઈ પર વાવવા માટે મદદરૂપ." },
+        { name: "કલ્ટિવેટર", img: "../images/tools/cultivator.jpg", benefit: "જમીન હળવી કરવા અને નિંદામણ દૂર કરવા માટે." },
+        { name: "રોટાવેટર", img: "../images/tools/rotavator.jpg", benefit: "જમીનને સરખી રીતે પલટાવે અને ખાતર મિક્સ કરે છે." },
+        { name: "કુહાડી", img: "../images/tools/hoe.jpg", benefit: "ખાડા કરવા અને નિંદામણ દૂર કરવા માટેનું હાથ સાધન." },
+        { name: "નિંદામણ કાપણું", img: "../images/tools/weeder.jpg", benefit: "નિંદામણ દૂર કરવામાં સરળતા લાવે છે." }
+      ],
+      transport: [
+        { name: "બળદગાડી", img: "../images/tools/bullockcart.jpg", benefit: "અનાજ અને માલ પરંપરાગત રીતે લઈ જવા માટે." },
+        { name: "ટ્રેક્ટર ટ્રોલી", img: "../images/tools/trolley.jpg", benefit: "ભારે માલ પરિવહન માટે ઉપયોગી." },
+        { name: "ટ્રક", img: "../images/tools/truck.jpg", benefit: "લાંબા અંતરે મોટા પ્રમાણમાં પાક પરિવહન માટે." },
+        { name: "સેક કૅરિયર", img: "../images/tools/sack.jpg", benefit: "અનાજની બોરીઓ હાથેથી વહન કરવા માટે." },
+        { name: "હેન્ડ કાર્ટ", img: "../images/tools/handcart.jpg", benefit: "ખેતરમાં ટૂંકા અંતરે માલ પરિવહન માટે." },
+        { name: "પિકઅપ વાન", img: "../images/tools/pickup.jpg", benefit: "સ્થાનિક પરિવહન માટે સસ્તું વાહન." }
+      ],
+      storage: [
+        { name: "અનાજ સાયલો", img: "../images/tools/silo.jpg", benefit: "અનાજ લાંબા સમય સુધી સુરક્ષિત રાખે છે." },
+        { name: "સંગ્રહ થેલીઓ", img: "../images/tools/storagebag.jpg", benefit: "નાના પ્રમાણમાં અનાજ રાખવા માટે." },
+        { name: "કોલ્ડ સ્ટોરેજ", img: "../images/tools/coldstorage.jpg", benefit: "ફળ અને શાકભાજી માટે તાપમાન નિયંત્રિત કરે છે." },
+        { name: "ડ્રમ", img: "../images/tools/drum.jpg", benefit: "દ્રવ અથવા અનાજ સંગ્રહવા માટે." },
+        { name: "મેટલ બિન", img: "../images/tools/bin.jpg", benefit: "ટકાઉ સંગ્રહ માટે મજબૂત વિકલ્પ." },
+        { name: "ગોદામ", img: "../images/tools/warehouse.jpg", benefit: "મોટા પાયે અનાજ સંગ્રહ માટે." }
+      ],
+      irrigation: [
+        { name: "સ્પ્રિંકલર સિસ્ટમ", img: "../images/tools/sprinkler.jpg", benefit: "જમીન પર સમાન રીતે પાણી છાંટે છે." },
+        { name: "ડ્રિપ સિંચાઈ", img: "../images/tools/drip.jpg", benefit: "જડ સુધી સીધું પાણી પહોંચાડી પાણી બચાવે છે." },
+        { name: "પાણી પંપ", img: "../images/tools/pump.jpg", benefit: "કૂવો કે નદીમાંથી પાણી ખેંચવા માટે." },
+        { name: "કેનાલ સિસ્ટમ", img: "../images/tools/canal.jpg", benefit: "મોટા પાયે સિંચાઈ માટે." },
+        { name: "પાણીનું કુંડાળું", img: "../images/tools/wateringcan.jpg", benefit: "હાથથી પાણી આપવાનું સરળ સાધન." },
+        { name: "પાઈપ સિંચાઈ", img: "../images/tools/pipe.jpg", benefit: "પાઈપ દ્વારા પાણી વહેંચવામાં મદદ કરે છે." }
+      ],
+      fertilizer: [
+        { name: "ખાતર છાંટણ યંત્ર", img: "../images/tools/spreader.jpg", benefit: "ખાતર ખેતરમાં સમાન રીતે છાંટે છે." },
+        { name: "સ્પ્રેયર", img: "../images/tools/sprayer.jpg", benefit: "તરલ ખાતર અને કીટનાશક છાંટવા માટે." },
+        { name: "ખાતર કુંડો", img: "../images/tools/compost.jpg", benefit: "સેંદરીય ખાતર બનાવવામાં મદદરૂપ." },
+        { name: "બ્રોડકાસ્ટ સિડર", img: "../images/tools/broadcast.jpg", benefit: "બીજ અને ખાતર સાથે વાવવા માટે." },
+        { name: "ખાતર ગાડી", img: "../images/tools/manure.jpg", benefit: "સેંદરીય ખાતર ખેતરમાં લઈ જવા માટે." },
+        { name: "ડ્રમ સિડર", img: "../images/tools/drumseeder.jpg", benefit: "ખાતર અને બીજ સાથે વાવણી માટે." }
+      ],
+      protection: [
+        { name: "કીટક જાળી", img: "../images/tools/net.jpg", benefit: "પાકને કીટકોથી રક્ષિત કરે છે." },
+        { name: "બોલો", img: "../images/tools/scarecrow.jpg", benefit: "પંખીઓને દૂર રાખવા પરંપરાગત રીત." },
+        { name: "સેંદરીય સ્પ્રેયર", img: "../images/tools/organicsprayer.jpg", benefit: "સેંદરીય કીટનાશક છાંટવા માટે." },
+        { name: "વાડ", img: "../images/tools/fence.jpg", benefit: "પશુઓને ખેતરમાં પ્રવેશતા અટકાવે છે." },
+        { name: "ટ્રેપ", img: "../images/tools/trap.jpg", benefit: "હાનિકારક કીટકોને પકડવા માટે." },
+        { name: "પાક આવરણ", img: "../images/tools/cover.jpg", benefit: "પાકને ખરાબ હવામાનથી સુરક્ષિત રાખે છે." }
+      ]
+    };
+
+    function showTools(category, btn) {
+      document.querySelectorAll(".methods-list button").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+
+      const display = document.getElementById("toolsDisplay");
+      const cards = toolsData[category].map(t => 
+        `<div class="tool-card">
+           <h3>${t.name}</h3>
+           <img src="${t.img}" alt="${t.name}"/>
+           <p>${t.benefit}</p>
+         </div>`
+      ).join("");
+      display.innerHTML = `<h2>${btn.innerText}</h2><div class="tool-grid">${cards}</div>`;
+    }
+
+    
+  </script>
+</body>
+</html>

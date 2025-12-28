@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Anndata | Anndata</title>
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+  <header>
+    <div style="display: flex; align-items: center;">
+      <img src="../images/logo.jpeg" alt="Anndata Logo" class="logo" />
+      <div class="logo-title" style="line-height: 1;">
+        <span style="font-size: 2rem; font-weight: bold; color: #fff;">Anndata</span>
+        <span style="font-size: 1rem; color: #e0ffe0;">True Friend of Farmers</span>
+      </div>
+    </div>
+    <nav>
+      <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </div>
+      <ul class="navbar" id="nav-links">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="tools.html" >Tools</a></li>
+        <li><a href="organic.html" >Organic Farming</a></li>
+        <li><a href="crops.html" >Crop Info</a></li>
+        <li><a href="register.php" >Register / Login</a></li>
+        
+      </ul>
+      
+    </nav>
+
+    
+
+  </header>
+
+  <main>
+    <section class="hero-section" id="hero-section" style="position: relative;">
+     <button onclick="window.location.href='../index.html'"
+  style="
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 8px 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    z-index: 10;
+  ">
+  🌍 ભાષા બદલો / Change Language
+</button>
+
+      <div class="hero-content">
+        <h1>Anndata – True Friend of Farmers</h1>
+        <p>A simple and secure platform for tools, guidance, and support.</p>
+        <button onclick="learnMore()">Learn More</button>
+      </div>
+    </section>
+
+    <section class="about-section">
+      <h2>About Us</h2>
+      <p>
+        Anndata is a website built for farmers that provides information on farming tools, organic methods, and more — all in simple language.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Anndata | All rights reserved.</p>
+  </footer>
+
+  <script src="../script.js"></script>
+
+</body>
+</html>

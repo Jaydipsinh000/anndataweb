@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>अन्नदाता | उपकरण</title>
+  <link rel="stylesheet" href="../styles.css" />
+  <style>
+    body { font-family: Arial, sans-serif; margin:0; padding:0; background:#f5f7fa; }
+    .container { display:flex; height:calc(100vh - 100px); }
+    .methods-list { width:18%; background:#ffffff; border-right:2px solid #eee; padding:15px; box-shadow:2px 0 8px rgba(0,0,0,0.05); overflow-y:auto; }
+    .methods-list button { display:block; width:100%; background:#f0f0f0; border:none; padding:12px; margin-bottom:8px; text-align:left; font-size:16px; border-radius:6px; cursor:pointer; transition:background 0.3s ease; }
+    .methods-list button:hover { background:#d9f2d9; }
+    .methods-list button.active { background:#2b7a0b; color:white; font-weight:bold; }
+    .tools-display { flex:1; padding:20px; overflow-y:auto; height:calc(100vh - 100px); }
+    .tool-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:25px; margin-top:20px; }
+    @media(max-width:992px){ .tool-grid{ grid-template-columns:repeat(2,1fr);} }
+    @media(max-width:600px){ .tool-grid{ grid-template-columns:1fr;} }
+    .tool-card { background:#fff; border-radius:12px; box-shadow:0 6px 14px rgba(0,0,0,0.1); text-align:center; padding:20px; transition:transform 0.3s ease; }
+    .tool-card:hover { transform:translateY(-6px); }
+    .tool-card h3 { margin:0 0 15px; font-size:20px; color:#2b7a0b; }
+    .tool-card img { width:100%; height:200px; object-fit:contain; margin-bottom:15px; }
+    .tool-card p { margin:0; color:#333; font-size:15px; line-height:1.4; }
+  </style>
+</head>
+<body>
+  <!-- Header/Navbar -->
+  <header>
+    <div style="display: flex; align-items: center;">
+      <img src="../images/logo.jpeg" alt="Annadata Logo" class="logo" />
+      <div class="logo-title" style="line-height: 1;">
+        <span style="font-size: 2rem; font-weight: bold; color: #fff;">अन्नदाता</span><br>
+        <span style="font-size: 1rem; color: #e0ffe0;">किसानों का सच्चा साथी</span>
+      </div>
+    </div>
+    <nav>
+      <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </div>
+      <ul class="navbar" id="nav-links">
+        <li><a href="index.html" >होम</a></li>
+        <li><a href="tools.html"class="active">उपकरण</a></li>
+        <li><a href="organic.html">जैविक खेती</a></li>
+        <li><a href="crops.html">फसल जानकारी</a></li>
+        <li><a href="register.php">पंजीकरण</a></li>
+        
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main content -->
+  <div class="container">
+    <div class="methods-list">
+      <button onclick="showTools('harvesting', this)">कटाई के उपकरण</button>
+      <button onclick="showTools('growing', this)">बुवाई के उपकरण</button>
+      <button onclick="showTools('transport', this)">परिवहन उपकरण</button>
+      <button onclick="showTools('storage', this)">भंडारण उपकरण</button>
+      <button onclick="showTools('irrigation', this)">सिंचाई उपकरण</button>
+      <button onclick="showTools('fertilizer', this)">उर्वरक उपकरण</button>
+      <button onclick="showTools('protection', this)">फसल सुरक्षा उपकरण</button>
+    </div>
+
+    <div class="tools-display" id="toolsDisplay">
+      <h2 style="padding:40px; text-align:center; color:#2b7a0b;">कृपया एक श्रेणी चुनें</h2>
+    </div>
+  </div>
+<script src="../script.js"></script>
+  <script>
+    const toolsData = {
+      harvesting: [
+        { name: "दरांती", img: "../images/tools/sickle.jpg", benefit: "अनाज और घास की मैनुअल कटाई के लिए हल्का उपकरण।" },
+        { name: "कटाई मशीन", img: "../images/tools/harvester.jpg", benefit: "बड़े खेतों में तेजी से कटाई के लिए।" },
+        { name: "थ्रेशर", img: "../images/tools/thresher.jpg", benefit: "अनाज को पौधों से अलग करता है।" },
+        { name: "कम्बाइन हार्वेस्टर", img: "../images/tools/combine.jpg", benefit: "एक साथ कटाई, गहाई और सफाई करता है।" },
+        { name: "रीपर", img: "../images/tools/reaper.jpg", benefit: "गेहूं और धान की कटाई जल्दी करता है।" },
+        { name: "कैंची", img: "../images/tools/shears.jpg", benefit: "फल और छोटे पौधों की छंटाई के लिए।" }
+      ],
+      growing: [
+        { name: "हल", img: "../images/tools/plough.jpg", benefit: "जमीन जोतने और तैयार करने के लिए।" },
+        { name: "बीज ड्रिल", img: "../images/tools/seeddriil.jpg", benefit: "बीज समान गहराई पर बोने के लिए।" },
+        { name: "कल्टीवेटर", img: "../images/tools/cultivator.jpg", benefit: "जमीन को हल्का करने और खरपतवार हटाने के लिए।" },
+        { name: "रोटावेटर", img: "../images/tools/rotavator.jpg", benefit: "मिट्टी को बराबर पलटता और खाद मिलाता है।" },
+        { name: "कुदाल", img: "../images/tools/hoe.jpg", benefit: "गड्ढे बनाने और खरपतवार हटाने के लिए।" },
+        { name: "वीडर", img: "../images/tools/weeder.jpg", benefit: "खरपतवार हटाने में सहायक।" }
+      ],
+      transport: [
+        { name: "बैलगाड़ी", img: "../images/tools/bullockcart.jpg", benefit: "पारंपरिक रूप से अनाज और सामान ढोने के लिए।" },
+        { name: "ट्रैक्टर ट्रॉली", img: "../images/tools/trolley.jpg", benefit: "भारी सामान ढोने के लिए।" },
+        { name: "ट्रक", img: "../images/tools/truck.jpg", benefit: "लंबी दूरी पर फसल ढोने के लिए।" },
+        { name: "बोरा ढोने का साधन", img: "../images/tools/sack.jpg", benefit: "अनाज के बोरे ले जाने के लिए।" },
+        { name: "हैंडकार्ट", img: "../images/tools/handcart.jpg", benefit: "खेत में सामान ढोने के लिए।" },
+        { name: "पिकअप वाहन", img: "../images/tools/pickup.jpg", benefit: "स्थानीय परिवहन के लिए।" }
+      ],
+      storage: [
+        { name: "अनाज साइलो", img: "../images/tools/silo.jpg", benefit: "लंबे समय तक सुरक्षित भंडारण।" },
+        { name: "भंडारण बैग", img: "../images/tools/storagebag.jpg", benefit: "छोटे पैमाने पर अनाज रखने के लिए।" },
+        { name: "कोल्ड स्टोरेज", img: "../images/tools/coldstorage.jpg", benefit: "फल और सब्जियों के लिए।" },
+        { name: "ड्रम", img: "../images/tools/drum.jpg", benefit: "तरल या अनाज रखने के लिए।" },
+        { name: "धातु डिब्बा", img: "../images/tools/bin.jpg", benefit: "टिकाऊ भंडारण के लिए।" },
+        { name: "गोदाम", img: "../images/tools/warehouse.jpg", benefit: "बड़े पैमाने पर भंडारण।" }
+      ],
+      irrigation: [
+        { name: "स्प्रिंकलर सिस्टम", img: "../images/tools/sprinkler.jpg", benefit: "पानी समान रूप से छिड़कता है।" },
+        { name: "ड्रिप सिंचाई", img: "../images/tools/drip.jpg", benefit: "जड़ तक पानी पहुँचाकर बचत करता है।" },
+        { name: "पानी पंप", img: "../images/tools/pump.jpg", benefit: "कुएँ या नहर से पानी खींचने के लिए।" },
+        { name: "नहर प्रणाली", img: "../images/tools/canal.jpg", benefit: "बड़े पैमाने पर सिंचाई।" },
+        { name: "पानी का डिब्बा", img: "../images/tools/wateringcan.jpg", benefit: "हाथ से पानी देने का सरल साधन।" },
+        { name: "पाइप सिंचाई", img: "../images/tools/pipe.jpg", benefit: "पाइप द्वारा पानी पहुँचाना।" }
+      ],
+      fertilizer: [
+        { name: "उर्वरक छिड़काव यंत्र", img: "../images/tools/spreader.jpg", benefit: "खेत में उर्वरक समान रूप से डालता है।" },
+        { name: "स्प्रेयर", img: "../images/tools/sprayer.jpg", benefit: "तरल उर्वरक और कीटनाशक छिड़कने के लिए।" },
+        { name: "कंपोस्ट डिब्बा", img: "../images/tools/compost.jpg", benefit: "जैविक खाद बनाने के लिए।" },
+        { name: "ब्रॉडकास्ट सीडर", img: "../images/tools/broadcast.jpg", benefit: "बीज और उर्वरक बोने के लिए।" },
+        { name: "गोबर गाड़ी", img: "../images/tools/manure.jpg", benefit: "जैविक खाद खेत में ले जाने के लिए।" },
+        { name: "ड्रम सीडर", img: "../images/tools/drumseeder.jpg", benefit: "बीज और खाद बोने के लिए।" }
+      ],
+      protection: [
+        { name: "कीट जाल", img: "../images/tools/net.jpg", benefit: "फसल को कीड़ों से बचाता है।" },
+        { name: "काकभगोड़ा", img: "../images/tools/scarecrow.jpg", benefit: "पक्षियों को भगाने के लिए।" },
+        { name: "जैविक स्प्रेयर", img: "../images/tools/organicsprayer.jpg", benefit: "जैविक कीटनाशक छिड़कने के लिए।" },
+        { name: "बाड़", img: "../images/tools/fence.jpg", benefit: "पशुओं को खेत से दूर रखने के लिए।" },
+        { name: "जाल/ट्रैप", img: "../images/tools/trap.jpg", benefit: "हानिकारक कीड़ों को पकड़ने के लिए।" },
+        { name: "फसल आवरण", img: "../images/tools/cover.jpg", benefit: "खराब मौसम से फसल की रक्षा करता है।" }
+      ]
+    };
+
+    function showTools(category, btn) {
+      document.querySelectorAll(".methods-list button").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+
+      const display = document.getElementById("toolsDisplay");
+      const cards = toolsData[category].map(t => 
+        `<div class="tool-card">
+           <h3>${t.name}</h3>
+           <img src="${t.img}" alt="${t.name}"/>
+           <p>${t.benefit}</p>
+         </div>`
+      ).join("");
+      display.innerHTML = `<h2>${btn.innerText}</h2><div class="tool-grid">${cards}</div>`;
+    }
+
+  
+  </script>
+</body>
+</html>

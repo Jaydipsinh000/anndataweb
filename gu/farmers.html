@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ખેડૂત યાદી</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <header>
+    <div class="logo-title-wrapper">
+      <img src="images/logo.jpeg" alt="Anndata Logo" class="logo" />
+      <div class="logo-title">
+        <span class="logo-main">અન્નદાતા</span>
+        <span class="logo-sub">ખેડૂતનો સાચો સાથી</span>
+      </div>
+    </div>
+    <nav>
+      <ul class="navbar" id="nav-links">
+        <li><a href="index.html">હોમ</a></li>
+        <li><a href="tools.html">સાધનો</a></li>
+        <li><a href="organic.html">જૈવિક ખેતી</a></li>
+        <li><a href="crops.html" class="active">પાક માહિતી</a></li>
+        <li><a href="register.html">નોંધણી</a></li>
+        <li><a href="contact.html">સંપર્ક કરો</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main class="content-section">
+    <h1>નોંધાયેલ ખેડૂત યાદી</h1>
+    <ul id="farmerList"></ul>
+  </main>
+  <footer><p>© 2025 અન્નદાતા | All rights reserved.</p></footer>
+  <script>
+    const farmers = JSON.parse(localStorage.getItem("farmers")) || [];
+    const ul = document.getElementById("farmerList");
+    farmers.forEach(f => {
+      const li = document.createElement("li");
+      li.textContent = `${f.name} (${f.village}) - ${f.mobile}`;
+      ul.appendChild(li);
+    });
+  </script>
+</body>
+</html>
